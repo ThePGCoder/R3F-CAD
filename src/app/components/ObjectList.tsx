@@ -1,4 +1,4 @@
-import { Box, Typography, List, ListItem, Divider } from "@mui/material";
+import { Box, Typography, List, ListItem } from "@mui/material";
 import { useCADStore } from "../store/useCADStore";
 
 export const ObjectList = () => {

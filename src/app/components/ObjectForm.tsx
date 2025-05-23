@@ -38,7 +38,10 @@ export const ObjectForm = ({ onClose }: ObjectFormProps) => {
   const [form, setForm] = useState<FormState>(defaultForm);
   const [positionInput, setPositionInput] = useState("0,0,0");
 
-  const handleChange = (field: keyof FormState, value: any) => {
+  const handleChange = <K extends keyof FormState>(
+    field: K,
+    value: FormState[K]
+  ) => {
     setForm((prev) => ({
       ...prev,
       [field]: value,
@@ -56,63 +59,69 @@ export const ObjectForm = ({ onClose }: ObjectFormProps) => {
   const handleSubmit = () => {
     addObject(form);
     setForm(defaultForm);
+    setPositionInput("0,0,0");
     onClose?.();
   };
 
   return (
     <Box p={2}>
-      
       <Stack spacing={2}>
         <Typography variant="h6">Add Object</Typography>
+
         <TextField
-        size="small"
+          size="small"
           label="Width"
           type="number"
           value={form.width}
-          onChange={(e) => handleChange("width", +e.target.value)}
+          onChange={(e) => handleChange("width", Number(e.target.value))}
         />
         <TextField
-        size="small"
+          size="small"
           label="Length"
           type="number"
           value={form.length}
-          onChange={(e) => handleChange("length", +e.target.value)}
+          onChange={(e) => handleChange("length", Number(e.target.value))}
         />
         <TextField
-        size="small"
+          size="small"
           label="Height"
           type="number"
           value={form.height}
-          onChange={(e) => handleChange("height", +e.target.value)}
+          onChange={(e) => handleChange("height", Number(e.target.value))}
         />
         <TextField
-        size="small"
+          size="small"
           label="Position (X,Y,Z)"
           type="text"
           value={positionInput}
           onChange={(e) => handlePositionChange(e.target.value)}
         />
         <TextField
-        size="small"
+          size="small"
           select
           label="Shape"
           value={form.shape}
-          onChange={(e) => handleChange("shape", e.target.value)}
+          onChange={(e) =>
+            handleChange("shape", e.target.value as FormState["shape"])
+          }
         >
           <MenuItem value="box">Box</MenuItem>
           <MenuItem value="cylinder">Cylinder</MenuItem>
           <MenuItem value="sphere">Sphere</MenuItem>
         </TextField>
         <TextField
-        size="small"
+          size="small"
           select
           label="Material"
           value={form.material}
-          onChange={(e) => handleChange("material", e.target.value)}
+          onChange={(e) =>
+            handleChange("material", e.target.value as FormState["material"])
+          }
         >
           <MenuItem value="wood">Wood</MenuItem>
           <MenuItem value="metal">Metal</MenuItem>
         </TextField>
+
         <Button variant="contained" onClick={handleSubmit}>
           Add
         </Button>

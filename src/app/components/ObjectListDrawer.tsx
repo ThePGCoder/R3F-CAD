@@ -23,16 +23,18 @@ export const ObjectListDrawer = () => {
   const setObjects = useCADStore((s) => s.setObjects);
   const [open, setOpen] = useState(true);
 
-  const handleChange = (
-    id: string,
-    field: keyof (typeof objects)[0],
-    value: string
-  ) => {
-    const parsed = parseFloat(value);
-    if (!isNaN(parsed)) {
-      updateObject(id, { [field]: parsed } as any);
-    }
-  };
+  type EditableNumberField = "width" | "length" | "height";
+
+const handleChange = (
+  id: string,
+  field: EditableNumberField,
+  value: string
+) => {
+  const parsed = parseFloat(value);
+  if (!isNaN(parsed)) {
+    updateObject(id, { [field]: parsed });
+  }
+};
 
   const handlePositionChange = (id: string, index: number, value: string) => {
     const parsed = parseFloat(value);

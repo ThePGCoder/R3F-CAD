@@ -13,7 +13,7 @@ import { ObjectForm } from "./components/ObjectForm";
 import { ObjectListDrawer } from "./components/ObjectListDrawer";
 
 export default function HomePage() {
-  const theme = useTheme();
+  
   const [open, setOpen] = useState(false);
 
   return (
