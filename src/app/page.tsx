@@ -18,10 +18,10 @@ export default function HomePage() {
 
   return (
     <Box sx={{ position: "relative", width: "100vw", height: "100vh" }}>
-      {/* Fullscreen canvas */}
+
       <CanvasScene />
 <ObjectListDrawer />
-      {/* Floating Add Button */}
+
       <Fab
       size="small"
         color="primary"
@@ -37,7 +37,6 @@ export default function HomePage() {
         <AddIcon />
       </Fab>
 
-      {/* Modal Form */}
       <Modal open={open} onClose={() => setOpen(false)}>
         <Box
           sx={{
